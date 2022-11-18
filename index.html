@@ -4,19 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>socialLogin</title>
+    <title>핸드폰 번호로 인증</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css" type="text/css">
+    <meta property="og:image" content="https://blogpfthumb-phinf.pstatic.net/MjAyMTEwMzFfMjQz/MDAxNjM1NjUzNzk3Mzk0.uCB-SUDqYW8yiYsJwbHSO3OLeqoI-FY_NdcJ7LFAPxog.cwdAlotAkJ7aV8tha4ygkUy6y4sE8mYnzCPS7RJYgzkg.JPEG.hanlyn1110/channels4_profile.jpg?type=w161">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="436">
+    <meta property="og:image:height" content="228">
+    <meta property="og:title" content="핸드폰 번호로 인증">
+    <meta property="og:description" content="핸드폰 번호로 인증">
   </head>
   <body>
-    <button id="googleLogin">구글 아이디로 로그인</button>
-
     <form>
-      핸드폰 번호 : <input id="phoneNumber" />
+      핸드폰 번호 (국번 없이) : <input id="phoneNumber" type="number"/>
       <button id="phoneNumberButton">핸드폰 번호 전송</button>
     </form>
 
     <form>
       확인 코드 : <input id="confirmCode" />
-      <button id="confrimCodeButton">확인 코드 전송</button>
+      <button id="confrimCodeButton">확인 코드 인증</button>
     </form>
 
     <script type="module">
@@ -54,29 +59,6 @@
       const auth = getAuth();
       auth.languageCode = "ko";
 
-      document.getElementById("googleLogin").addEventListener("click", () => {
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            console.log(result);
-            // ...
-          })
-          .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log(error);
-            // ...
-          });
-      });
       window.recaptchaVerifier = new RecaptchaVerifier(
         "phoneNumberButton",
         {
@@ -134,3 +116,4 @@
     </script>
   </body>
 </html>
+
